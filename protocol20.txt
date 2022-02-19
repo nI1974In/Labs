@@ -1,0 +1,614 @@
+student@vivobook-s533ea:~/Labs/Lab20$ cat testfile1.txt
+1111111111111111111
+1111111101111111111
+student@vivobook-s533ea:~/Labs/Lab20$ cat testfile2.txt
+1111111111111111111
+1111111111111111111
+student@vivobook-s533ea:~/Labs/Lab20$ cmp testfile1.txt testfile2.txt
+testfile1.txt testfile2.txt различаются: байт 29, строка 2
+student@vivobook-s533ea:~/Labs/Lab20$ cmp -b testfile1.txt testfile2.txt
+testfile1.txt testfile2.txt различаются: байт 29, строка 2 равен  60 0  61 1
+student@vivobook-s533ea:~/Labs/Lab20$ cmp -i 30:29 testfile1.txt testfile2.txt
+testfile1.txt testfile2.txt различаются: байт 10, строка 1
+student@vivobook-s533ea:~/Labs/Lab20$ cat testfile1.txt
+1011161111111111111
+1111111101111111911
+student@vivobook-s533ea:~/Labs/Lab20$ cat testfile2.txt
+1111111111111111111
+1111111111111111111
+student@vivobook-s533ea:~/Labs/Lab20$ cmp -l testfile1.txt testfile2.txt
+ 2  60  61
+ 6  66  61
+29  60  61
+37  71  61
+student@vivobook-s533ea:~/Labs/Lab20$ cmp -n 5 testfile1.txt testfile2.txt
+testfile1.txt testfile2.txt различаются: байт 2, строка 1
+student@vivobook-s533ea:~/Labs/Lab20$ cmp -s testfile1.txt testfile2.txt
+student@vivobook-s533ea:~/Labs/Lab20$ cat testfile1.txt
+000
+001
+010
+100
+student@vivobook-s533ea:~/Labs/Lab20$ cat testfile2.txt
+000
+010
+011
+100
+101
+student@vivobook-s533ea:~/Labs/Lab20$ comm testfile1.txt testfile2.txt
+		000
+001
+		010
+	011
+		100
+	101
+student@vivobook-s533ea:~/Labs/Lab20$ comm -1 testfile1.txt testfile2.txt
+	000
+	010
+011
+	100
+101
+student@vivobook-s533ea:~/Labs/Lab20$ comm -2 testfile1.txt testfile2.txt
+	000
+001
+	010
+	100
+student@vivobook-s533ea:~/Labs/Lab20$ comm -3 testfile1.txt testfile2.txt
+001
+	011
+	101
+student@vivobook-s533ea:~/Labs/Lab20$ comm -23 testfile1.txt testfile2.txt
+001
+student@vivobook-s533ea:~/Labs/Lab20$ wc
+      0       0       0
+student@vivobook-s533ea:~/Labs/Lab20$ wc
+Line #1
+Line #2
+Line #3      2       6      23
+student@vivobook-s533ea:~/Labs/Lab20$ wc
+Line #1
+Line #2     
+Line #3
+      3       6      24
+student@vivobook-s533ea:~/Labs/Lab20$ cat testfile1.txt
+123 456 789
+12 34 56 78
+1 2 3 4 5
+student@vivobook-s533ea:~/Labs/Lab20$ wc tetfile1.txt
+wc: tetfile1.txt: Нет такого файла или каталога
+student@vivobook-s533ea:~/Labs/Lab20$ wc testfile1.txt
+ 3 12 34 testfile1.txt
+student@vivobook-s533ea:~/Labs/Lab20$ wc -cmlw testfile1.txt
+ 3 12 34 34 testfile1.txt
+student@vivobook-s533ea:~/Labs/Lab20$ cat testfile1.txt
+123 456 789
+12 34 56 78
+1 2 3 4 5
+student@vivobook-s533ea:~/Labs/Lab20$ cat testfile2.txt
+000
+010
+011
+100
+101
+student@vivobook-s533ea:~/Labs/Lab20$ dd if=testfile1.txt of=testfile2.txt
+0+1 записей получено
+0+1 записей отправлено
+34 байта скопировано, 0,000284283 s, 120 kB/s
+student@vivobook-s533ea:~/Labs/Lab20$ dd if=testfile1.txt of=testfile2.txt bs=1
+34+0 записей получено
+34+0 записей отправлено
+34 байта скопировано, 0,000376865 s, 90,2 kB/s
+student@vivobook-s533ea:~/Labs/Lab20$ cat testfile1.txt
+123 456 789
+12 34 56 78
+1 2 3 4 5
+student@vivobook-s533ea:~/Labs/Lab20$ cat testfile2.txt
+123 456 789
+12 34 56 78
+1 2 3 4 5
+student@vivobook-s533ea:~/Labs/Lab20$ diff testfile1.txt testfile2.txt
+2,3c2,3
+< Line #2
+< Line #3
+---
+> Line#2
+> Line#3
+student@vivobook-s533ea:~/Labs/Lab20$ diff -y testfile1.txt testfile2.txt
+Line #1								Line #1
+Line #2							      |	Line#2
+Line #3							      |	Line#3
+Line #4								Line #4
+student@vivobook-s533ea:~/Labs/Lab20$ grep Student /etc/passwd
+student:x:1000:1000:Student,,,:/home/student:/bin/bash
+student@vivobook-s533ea:~/Labs/Lab20$ grep -i Student /etc/passwd
+student:x:1000:1000:Student,,,:/home/student:/bin/bash
+student@vivobook-s533ea:~/Labs/Lab20$ grep -iv Student /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+...
+student@vivobook-s533ea:~/Labs/Lab20$ cat testfile1.txt
+1 000 011
+2 001 010
+3 010 001
+4 011 000
+student@vivobook-s533ea:~/Labs/Lab20$ cat testfile2.txt
+1 011 000
+2 010 001
+3 001 010
+4 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ join testfile1.txt testfile2.txt
+1 000 011 011 000
+2 001 010 010 001
+3 010 001 001 010
+4 011 000 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ join -1 1 -2 1 testfile1.txt testfile2.txt
+1 000 011 011 000
+2 001 010 010 001
+3 010 001 001 010
+4 011 000 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ join -1 2 -2 2 testfile1.txt testfile2.txt
+join: testfile2.txt:2: без сортировки: 2 010 001
+011 4 000 1 000
+student@vivobook-s533ea:~/Labs/Lab20$ join -1 2 -2 3 testfile1.txt testfile2.txt
+000 1 011 1 011
+001 2 010 2 010
+010 3 001 3 001
+011 4 000 4 000
+student@vivobook-s533ea:~/Labs/Lab20$ sort testfile1.txt
+1 000 011
+2 001 010
+3 010 001
+4 011 000
+student@vivobook-s533ea:~/Labs/Lab20$ sort -k3 testfile1.txt
+4 011 000
+3 010 001
+2 001 010
+1 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ sort -k3 testfile1.txt | tail -n 2
+2 001 010
+1 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ touch out2
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out2  outfile  outfile2  testfile1.txt  testfile2.txt
+student@vivobook-s533ea:~/Labs/Lab20$ sort -k3 testfile1.txt | tail -n 2 | tee -a out1 out2
+2 001 010
+1 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out1  out2  outfile  outfile2  testfile1.txt  testfile2.txt
+student@vivobook-s533ea:~/Labs/Lab20$ cat out1
+2 001 010
+1 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ cat out2
+2 001 010
+1 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ sort -k3 testfile1.txt | tail -n 2 | tee -a out1 out2
+2 001 010
+1 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ cat out1
+2 001 010
+1 000 011
+2 001 010
+1 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ cat out2
+2 001 010
+1 000 011
+2 001 010
+1 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ tr '1' '0' < out1 > out2
+student@vivobook-s533ea:~/Labs/Lab20$ cat out1
+2 001 010
+1 000 011
+2 001 010
+1 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ cat out2
+2 000 000
+0 000 000
+2 000 000
+0 000 000
+student@vivobook-s533ea:~/Labs/Lab20$ tr [0-9] '*' < out2 >> out2
+student@vivobook-s533ea:~/Labs/Lab20$ cat out2
+2 000 000
+0 000 000
+2 000 000
+0 000 000
+* *** ***
+* *** ***
+* *** ***
+* *** ***
+student@vivobook-s533ea:~/Labs/Lab20$ uniq out2
+2 000 000
+0 000 000
+2 000 000
+0 000 000
+* *** ***
+student@vivobook-s533ea:~/Labs/Lab20$ uniq -u out2
+2 000 000
+0 000 000
+2 000 000
+0 000 000
+student@vivobook-s533ea:~/Labs/Lab20$ uniq --group out2
+2 000 000
+
+0 000 000
+
+2 000 000
+
+0 000 000
+
+* *** ***
+* *** ***
+* *** ***
+* *** ***
+student@vivobook-s533ea:~/Labs/Lab20$ uniq -c out2
+      1 2 000 000
+      1 0 000 000
+      1 2 000 000
+      1 0 000 000
+      4 * *** ***
+student@vivobook-s533ea:~/Labs/Lab20$ od -b out2
+0000000 062 040 060 060 060 040 060 060 060 012 060 040 060 060 060 040
+0000020 060 060 060 012 062 040 060 060 060 040 060 060 060 012 060 040
+0000040 060 060 060 040 060 060 060 012 052 040 052 052 052 040 052 052
+0000060 052 012 052 040 052 052 052 040 052 052 052 012 052 040 052 052
+0000100 052 040 052 052 052 012 052 040 052 052 052 040 052 052 052 012
+0000120
+student@vivobook-s533ea:~/Labs/Lab20$ od -c out2
+0000000   2       0   0   0       0   0   0  \n   0       0   0   0    
+0000020   0   0   0  \n   2       0   0   0       0   0   0  \n   0    
+0000040   0   0   0       0   0   0  \n   *       *   *   *       *   *
+0000060   *  \n   *       *   *   *       *   *   *  \n   *       *   *
+0000100   *       *   *   *  \n   *       *   *   *       *   *   *  \n
+0000120
+student@vivobook-s533ea:~/Labs/Lab20$ od -An -c out2
+   2       0   0   0       0   0   0  \n   0       0   0   0    
+   0   0   0  \n   2       0   0   0       0   0   0  \n   0    
+   0   0   0       0   0   0  \n   *       *   *   *       *   *
+   *  \n   *       *   *   *       *   *   *  \n   *       *   *
+   *       *   *   *  \n   *       *   *   *       *   *   *  \n
+student@vivobook-s533ea:~/Labs/Lab20$ od -i out2
+0000000   808460338   808460336   540019248   540028976
+0000020   170930224   808460338   808460336   540019248
+0000040   540028976   170930224   707403818   707403818
+0000060   539626026   539634218   170535466   707403818
+0000100   707403818   539626026   539634218   170535466
+0000120
+student@vivobook-s533ea:~/Labs/Lab20$ od -o out2
+0000000 020062 030060 020060 030060 005060 020060 030060 020060
+0000020 030060 005060 020062 030060 020060 030060 005060 020060
+0000040 030060 020060 030060 005060 020052 025052 020052 025052
+0000060 005052 020052 025052 020052 025052 005052 020052 025052
+0000100 020052 025052 005052 020052 025052 020052 025052 005052
+0000120
+student@vivobook-s533ea:~/Labs/Lab20$ od -x out2
+0000000 2032 3030 2030 3030 0a30 2030 3030 2030
+0000020 3030 0a30 2032 3030 2030 3030 0a30 2030
+0000040 3030 2030 3030 0a30 202a 2a2a 202a 2a2a
+0000060 0a2a 202a 2a2a 202a 2a2a 0a2a 202a 2a2a
+0000100 202a 2a2a 0a2a 202a 2a2a 202a 2a2a 0a2a
+0000120
+student@vivobook-s533ea:~/Labs/Lab20$ od out2
+0000000 020062 030060 020060 030060 005060 020060 030060 020060
+0000020 030060 005060 020062 030060 020060 030060 005060 020060
+0000040 030060 020060 030060 005060 020052 025052 020052 025052
+0000060 005052 020052 025052 020052 025052 005052 020052 025052
+0000100 020052 025052 005052 020052 025052 020052 025052 005052
+0000120
+student@vivobook-s533ea:~/Labs/Lab20$ sum out2
+40188     1
+student@vivobook-s533ea:~/Labs/Lab20$ echo "1234:567:89" | cut -b 1-4
+1234
+student@vivobook-s533ea:~/Labs/Lab20$ echo "1234:567:89" | cut -b 1-4,6-8,10-11
+123456789
+student@vivobook-s533ea:~/Labs/Lab20$ echo "1234:567:89" | cut -c 1-8
+1234:567
+student@vivobook-s533ea:~/Labs/Lab20$ nroff out2
+2 000 000 0 000 000 2 000 000 0 000 000 * *** *** * *** *** * ***
+*** * *** ***
+
+
+
+
+
+
+
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out1  out2  outfile  outfile2  testfile1.txt  testfile2.txt
+student@vivobook-s533ea:~/Labs/Lab20$ vim vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out1  out2  outfile  outfile2  testfile1.txt  testfile2.txt  vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ cat vimtest
+Это текстовый файл редактированный в vim
+student@vivobook-s533ea:~/Labs/Lab20$ mc
+
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out1  out2  outfile  outfile2  testfile1.txt  testfile2.txt  vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ tar --totals -cvf testfile1.tar testfile1.txt
+testfile1.txt
+Всего записано байт: 10240 (10KiB, 17MiB/s)
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out1  out2  outfile  outfile2  testfile1.tar  testfile1.txt  testfile2.txt  vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ tar -tf testfile1.tar
+testfile1.txt
+student@vivobook-s533ea:~/Labs/Lab20$ tar -xvf testfile1.tar
+testfile1.txt
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out1  out2  outfile  outfile2  testfile1.tar  testfile1.txt  testfile2.txt  vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ tar -cjvf testfile1.tar.bz2 testfile1.txt
+testfile1.txt
+student@vivobook-s533ea:~/Labs/Lab20$ tar -xjvf testfile1.tar.bz2 testfile1.txt
+testfile1.txt
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out1  out2  outfile  outfile2  testfile1.tar  testfile1.tar.bz2  testfile1.txt  testfile2.txt  vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ gzip testfile1.tar
+gzip: testfile1.tar.gz already exists; do you wish to overwrite (y or n)? y
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out1  out2  outfile  outfile2  testfile1.tar.bz2  testfile1.tar.gz  testfile1.txt  vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ cat out1
+2 001 010
+1 000 011
+2 001 010
+1 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ head -n 1 out1
+2 001 010
+
+student@vivobook-s533ea:~/Labs/Lab20$ iconv -l
+Следующий список содержит все известные встроенные кодировки. Это не
+обязательно означает, что можно использовать любые комбинации данных
+имён в параметрах командной строки FROM и TO. Одна и та же кодировка
+может быть указана под несколькими именами (псевдонимами).
+
+  437, 500, 500V1, 850, 851, 852, 855, 856, 857, 858, 860, 861, 862, 863, 864,
+  865, 866, 866NAV, 869, 874, 904, 1026, 1046, 1047, 8859_1, 8859_2, 8859_3,
+  8859_4, 8859_5, 8859_6, 8859_7, 8859_8, 8859_9, 10646-1:1993,
+  10646-1:1993/UCS4, ANSI_X3.4-1968, ANSI_X3.4-1986, ANSI_X3.4,
+  ANSI_X3.110-1983, ANSI_X3.110, ARABIC, ARABIC7, ARMSCII-8, ARMSCII8, ASCII,
+  ASMO-708, ASMO_449, BALTIC, BIG-5, BIG-FIVE, BIG5-HKSCS, BIG5, BIG5HKSCS,
+  BIGFIVE, BRF, BS_4730, CA, CN-BIG5, CN-GB, CN, CP-AR, CP-GR, CP-HU, CP037,
+  CP038, CP273, CP274, CP275, CP278, CP280, CP281, CP282, CP284, CP285, CP290,
+  CP297, CP367, CP420, CP423, CP424, CP437, CP500, CP737, CP770, CP771, CP772,
+  CP773, CP774, CP775, CP803, CP813, CP819, CP850, CP851, CP852, CP855, CP856,
+  CP857, CP858, CP860, CP861, CP862, CP863, CP864, CP865, CP866, CP866NAV,
+  CP868, CP869, CP870, CP871, CP874, CP875, CP880, CP891, CP901, CP902, CP903,
+  CP904, CP905, CP912, CP915, CP916, CP918, CP920, CP921, CP922, CP930, CP932,
+  CP933, CP935, CP936, CP937, CP939, CP949, CP950, CP1004, CP1008, CP1025,
+  CP1026, CP1046, CP1047, CP1070, CP1079, CP1081, CP1084, CP1089, CP1097,
+  CP1112, CP1122, CP1123, CP1124, CP1125, CP1129, CP1130, CP1132, CP1133,
+  CP1137, CP1140, CP1141, CP1142, CP1143, CP1144, CP1145, CP1146, CP1147,
+  CP1148, CP1149, CP1153, CP1154, CP1155, CP1156, CP1157, CP1158, CP1160,
+  CP1161, CP1162, CP1163, CP1164, CP1166, CP1167, CP1250, CP1251, CP1252,
+  CP1253, CP1254, CP1255, CP1256, CP1257, CP1258, CP1282, CP1361, CP1364,
+  CP1371, CP1388, CP1390, CP1399, CP4517, CP4899, CP4909, CP4971, CP5347,
+  CP9030, CP9066, CP9448, CP10007, CP12712, CP16804, CPIBM861, CSA7-1, CSA7-2,
+  CSASCII, CSA_T500-1983, CSA_T500, CSA_Z243.4-1985-1, CSA_Z243.4-1985-2,
+  CSA_Z243.419851, CSA_Z243.419852, CSDECMCS, CSEBCDICATDE, CSEBCDICATDEA,
+  CSEBCDICCAFR, CSEBCDICDKNO, CSEBCDICDKNOA, CSEBCDICES, CSEBCDICESA,
+  CSEBCDICESS, CSEBCDICFISE, CSEBCDICFISEA, CSEBCDICFR, CSEBCDICIT, CSEBCDICPT,
+  CSEBCDICUK, CSEBCDICUS, CSEUCKR, CSEUCPKDFMTJAPANESE, CSGB2312, CSHPROMAN8,
+  CSIBM037, CSIBM038, CSIBM273, CSIBM274, CSIBM275, CSIBM277, CSIBM278,
+  CSIBM280, CSIBM281, CSIBM284, CSIBM285, CSIBM290, CSIBM297, CSIBM420,
+  CSIBM423, CSIBM424, CSIBM500, CSIBM803, CSIBM851, CSIBM855, CSIBM856,
+  CSIBM857, CSIBM860, CSIBM863, CSIBM864, CSIBM865, CSIBM866, CSIBM868,
+  CSIBM869, CSIBM870, CSIBM871, CSIBM880, CSIBM891, CSIBM901, CSIBM902,
+  CSIBM903, CSIBM904, CSIBM905, CSIBM918, CSIBM921, CSIBM922, CSIBM930,
+  CSIBM932, CSIBM933, CSIBM935, CSIBM937, CSIBM939, CSIBM943, CSIBM1008,
+  CSIBM1025, CSIBM1026, CSIBM1097, CSIBM1112, CSIBM1122, CSIBM1123, CSIBM1124,
+  CSIBM1129, CSIBM1130, CSIBM1132, CSIBM1133, CSIBM1137, CSIBM1140, CSIBM1141,
+  CSIBM1142, CSIBM1143, CSIBM1144, CSIBM1145, CSIBM1146, CSIBM1147, CSIBM1148,
+  CSIBM1149, CSIBM1153, CSIBM1154, CSIBM1155, CSIBM1156, CSIBM1157, CSIBM1158,
+  CSIBM1160, CSIBM1161, CSIBM1163, CSIBM1164, CSIBM1166, CSIBM1167, CSIBM1364,
+  CSIBM1371, CSIBM1388, CSIBM1390, CSIBM1399, CSIBM4517, CSIBM4899, CSIBM4909,
+  CSIBM4971, CSIBM5347, CSIBM9030, CSIBM9066, CSIBM9448, CSIBM12712,
+  CSIBM16804, CSIBM11621162, CSISO4UNITEDKINGDOM, CSISO10SWEDISH,
+  CSISO11SWEDISHFORNAMES, CSISO14JISC6220RO, CSISO15ITALIAN, CSISO16PORTUGESE,
+  CSISO17SPANISH, CSISO18GREEK7OLD, CSISO19LATINGREEK, CSISO21GERMAN,
+  CSISO25FRENCH, CSISO27LATINGREEK1, CSISO49INIS, CSISO50INIS8,
+  и т.д.
+student@vivobook-s533ea:~/Labs/Lab20$ iconv -f UTF-8 -t CP1251 out2
+2 000 000
+0 000 000
+2 000 000
+0 000 000
+* *** ***
+* *** ***
+* *** ***
+* *** ***
+student@vivobook-s533ea:~/Labs/Lab20$ nano rus.txt
+student@vivobook-s533ea:~/Labs/Lab20$ cat rus.txt
+Я устал делать лабы
+
+#Без лаб!
+student@vivobook-s533ea:~/Labs/Lab20$ iconv -f UTF-8 -t ASCII rus.txt
+iconv: недопустимая входная последовательность в позиции 0
+student@vivobook-s533ea:~/Labs/Lab20$ iconv -c -f UTF-8 -t ASCII rus.txt
+   
+
+# !
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out1  out2  outfile  outfile2  rus.txt  testfile1.tar.bz2  testfile1.tar.gz  testfile1.txt  vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ cat out1
+2 001 010
+1 000 011
+2 001 010
+1 000 011
+student@vivobook-s533ea:~/Labs/Lab20$ cat out2
+2 000 000
+0 000 000
+2 000 000
+0 000 000
+* *** ***
+* *** ***
+* *** ***
+* *** ***
+student@vivobook-s533ea:~/Labs/Lab20$ diff out1 out2
+1,4c1,8
+< 2 001 010
+< 1 000 011
+< 2 001 010
+< 1 000 011
+---
+> 2 000 000
+> 0 000 000
+> 2 000 000
+> 0 000 000
+> * *** ***
+> * *** ***
+> * *** ***
+> * *** ***
+student@vivobook-s533ea:~/Labs/Lab20$ diff out1 out2 > out.patch
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out1  out2  outfile  outfile2  out.patch  rus.txt  testfile1.tar.bz2  testfile1.tar.gz  testfile1.txt  vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ patch out1 -i out.patch
+patching file out1
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out1  out2  outfile  outfile2  out.patch  rus.txt  testfile1.tar.bz2  testfile1.tar.gz  testfile1.txt  vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ cat out1
+2 000 000
+0 000 000
+2 000 000
+0 000 000
+* *** ***
+* *** ***
+* *** ***
+* *** ***
+student@vivobook-s533ea:~/Labs/Lab20$ cat out2
+2 000 000
+0 000 000
+2 000 000
+0 000 000
+* *** ***
+* *** ***
+* *** ***
+* *** ***
+student@vivobook-s533ea:~/Labs/Lab20$ md5sum out1
+6f95cdc267cf0bb18c002ace4c08c0c9  out1
+student@vivobook-s533ea:~/Labs/Lab20$ du -h ~/Labs
+36K	/home/student/Labs/Lab10
+32K	/home/student/Labs/Lab9
+348K	/home/student/Labs/Lab5/jstu4-2.3/jstu4
+364K	/home/student/Labs/Lab5/jstu4-2.3
+368K	/home/student/Labs/Lab5
+64K	/home/student/Labs/Lab20
+32K	/home/student/Labs/Lab14
+28K	/home/student/Labs/kp3
+4,0K	/home/student/Labs/Lab3
+56K	/home/student/Labs/Lab11
+28K	/home/student/Labs/kp4
+12K	/home/student/Labs/Lab2/.ssh
+16K	/home/student/Labs/Lab2/Useless
+4,0K	/home/student/Labs/Lab2/Usefull/Useless
+8,0K	/home/student/Labs/Lab2/Usefull
+48K	/home/student/Labs/Lab2
+52K	/home/student/Labs/Lab13
+52K	/home/student/Labs/Lab12
+40K	/home/student/Labs/Lab15
+56K	/home/student/Labs/Lab8
+40K	/home/student/Labs/Lab1
+940K	/home/student/Labs
+student@vivobook-s533ea:~/Labs/Lab20$ file out1
+out1: ASCII text
+student@vivobook-s533ea:~/Labs/Lab20$ file out2
+out2: ASCII text
+student@vivobook-s533ea:~/Labs/Lab20$ file rus.txt
+rus.txt: UTF-8 Unicode text
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out1  out2  outfile  outfile2  out.patch  rus.txt  testfile1.tar.bz2  testfile1.tar.gz  testfile1.txt  vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ file out.patch
+out.patch: ASCII text
+student@vivobook-s533ea:~/Labs/Lab20$ file vimtest
+vimtest: UTF-8 Unicode text
+student@vivobook-s533ea:~/Labs/Lab20$ file myscript
+myscript: Bourne-Again shell script, ASCII text executable
+student@vivobook-s533ea:~/Labs/Lab20$ file myscript3
+myscript3: Bourne-Again shell script, ASCII text executable
+student@vivobook-s533ea:~/Labs/Lab20$ file testfile1.tar.bz2
+testfile1.tar.bz2: bzip2 compressed data, block size = 900k
+student@vivobook-s533ea:~/Labs/Lab20$ file testfile1.tar.gz
+testfile1.tar.gz: gzip compressed data, was "testfile1.tar", last modified: Fri Feb 18 21:29:53 2022, from Unix, original size modulo 2^32 10240
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  out1  out2  outfile  outfile2  out.patch  rus.txt  testfile1.tar.bz2  testfile1.tar.gz  testfile1.txt  vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ touch new
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  new  out1  out2  outfile  outfile2  out.patch  rus.txt  testfile1.tar.bz2  testfile1.tar.gz  testfile1.txt  vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ ls
+myscript  myscript1  myscript2  myscript3  new  out1  out2  outfile  outfile2  out.patch  rus.txt  testfile1.tar.bz2  testfile1.tar.gz  testfile1.txt  vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ find . -name "*.tar"
+student@vivobook-s533ea:~/Labs/Lab20$ find . -name "*.tar.*"
+./testfile1.tar.bz2
+./testfile1.tar.gz
+student@vivobook-s533ea:~/Labs/Lab20$ ls | xargs -t echo
+echo myscript myscript1 myscript2 myscript3 new out1 out2 outfile outfile2 out.patch rus.txt testfile1.tar.bz2 testfile1.tar.gz testfile1.txt vimtest 
+myscript myscript1 myscript2 myscript3 new out1 out2 outfile outfile2 out.patch rus.txt testfile1.tar.bz2 testfile1.tar.gz testfile1.txt vimtest
+student@vivobook-s533ea:~/Labs/Lab20$ cat out1 | xargs -t echo
+echo 2 000 000 0 000 000 2 000 000 0 000 000 '*' '***' '***' '*' '***' '***' '*' '***' '***' '*' '***' '***' 
+2 000 000 0 000 000 2 000 000 0 000 000 * *** *** * *** *** * *** *** * *** ***
+student@vivobook-s533ea:~/Labs/Lab20$ cat out1 | xargs -t0 echo
+echo '2 000 000'$'\n''0 000 000'$'\n''2 000 000'$'\n''0 000 000'$'\n''* *** ***'$'\n''* *** ***'$'\n''* *** ***'$'\n''* *** ***'$'\n' 
+2 000 000
+0 000 000
+2 000 000
+0 000 000
+* *** ***
+* *** ***
+* *** ***
+* *** ***
+
+student@vivobook-s533ea:~/Labs/Lab20$ df -h
+Файл.система   Размер Использовано  Дост Использовано% Cмонтировано в
+udev             3,7G            0  3,7G            0% /dev
+tmpfs            764M         2,2M  762M            1% /run
+/dev/nvme0n1p4    25G          11G   13G           47% /
+tmpfs            3,8G         6,7M  3,8G            1% /dev/shm
+tmpfs            5,0M         4,0K  5,0M            1% /run/lock
+tmpfs            3,8G            0  3,8G            0% /sys/fs/cgroup
+/dev/loop0       128K         128K     0          100% /snap/bare/5
+/dev/loop1        56M          56M     0          100% /snap/core18/2253
+/dev/loop2       219M         219M     0          100% /snap/gnome-3-34-1804/72
+/dev/loop4        51M          51M     0          100% /snap/snap-store/547
+/dev/loop5       249M         249M     0          100% /snap/gnome-3-38-2004/99
+/dev/loop3       248M         248M     0          100% /snap/gnome-3-38-2004/87
+/dev/loop6        62M          62M     0          100% /snap/core20/1270
+/dev/loop7        66M          66M     0          100% /snap/gtk-common-themes/1519
+/dev/nvme0n1p1   256M          31M  226M           13% /boot/efi
+/dev/loop8        56M          56M     0          100% /snap/core18/2284
+/dev/loop9        44M          44M     0          100% /snap/snapd/14978
+/dev/loop10       62M          62M     0          100% /snap/core20/1328
+/dev/loop11      219M         219M     0          100% /snap/gnome-3-34-1804/77
+/dev/loop12       55M          55M     0          100% /snap/snap-store/558
+/dev/loop13       66M          66M     0          100% /snap/gtk-common-themes/1515
+tmpfs            764M          64K  764M            1% /run/user/1000
+student@vivobook-s533ea:~/Labs/Lab20$ cat out1
+2 000 000
+0 000 000
+2 000 000
+0 000 000
+* *** ***
+* *** ***
+* *** ***
+* *** ***
+student@vivobook-s533ea:~/Labs/Lab20$ cat out2
+2 000 000
+0 000 000
+2 000 000
+0 000 000
+* *** ***
+* *** ***
+* *** ***
+* *** ***
+student@vivobook-s533ea:~/Labs/Lab20$ paste out1 out2
+2 000 000	2 000 000
+0 000 000	0 000 000
+2 000 000	2 000 000
+0 000 000	0 000 000
+* *** ***	* *** ***
+* *** ***	* *** ***
+* *** ***	* *** ***
+* *** ***	* *** ***
