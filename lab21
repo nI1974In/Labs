@@ -1,0 +1,129 @@
+#!/bin/bash
+
+mode=0
+
+if [ -z "$1" ]
+then
+
+    echo ""
+
+    read -p "Введите суффикс, файлы с которым необходимо переименовать: " suff
+
+    echo ""
+
+    read -p "Введите префикс, который необходимо добавлять к названию файлов: " pref
+
+elif [ "$1" == "-c" ]
+then
+
+    if [ $# -gt 3 ]
+    then
+
+        echo -e "\nСлишком много аргументов"
+
+        exit -1
+
+    fi
+
+    echo -e "\nРежим подтверждения установлен ключом -c"
+
+    mode=1
+
+    suff="$2"
+    pref="$3"
+
+    if [ -z "$2" ]
+    then
+
+        echo ""
+
+        read -p "Введите суффикс, файлы с которым необходимо переименовать: " suff
+
+    fi
+
+    if [ -z "$3" ]
+    then
+
+        echo ""
+
+        read -p "Введите префикс, который необходимо добавлять к названию файлов: " pref
+
+    fi
+
+elif [ -z "$2" ]
+then
+
+    suff="$1"
+    pref="$2"
+
+    echo ""
+
+    read -p "Введите префикс, который необходимо добавлять к названию файлов: " pref
+
+elif [ -n "$3" ]
+then
+
+    echo -e "\n\tСлишком много аргументов"
+
+    exit -1
+
+else
+
+    suff="$1"
+    pref="$2"
+
+fi
+
+echo -e "\nmode: "$mode"   suff: "$suff"   pref: "$pref""
+
+ans="default"
+newfile="default"
+count=0
+
+echo -e "\n\n\t    Старое название файла\t      Новое название файла\n"
+
+ls | grep -E "^[[:alnum:]]*$suff(\.[[:alnum:]]*)*\$" | while read file
+do
+
+    newfile=""$pref""$file""
+
+    count=$(( $count + 1 ))
+
+    echo -e ""$count"\t      "$file"\t\t\t"$newfile""
+
+done
+
+if [ $mode == 1 ]
+then
+
+    while [ $ans != "д" ] && [ $ans != "н" ]
+    do
+
+        echo -e "\n\t"
+
+        read -p "Переименовать эти файлы? [д/н] : " ans
+
+    done
+
+fi
+
+if [ $ans == "д" ] || [ $ans == "default" ]
+then
+
+    ls | grep -E "^[[:alnum:]]*$suff(\.[[:alnum:]]*)*\$" | while read file
+    do
+
+        newfile=""$pref""$file""
+
+        mv "$file" "$newfile"
+
+    done
+
+    echo -e "\n\t\t\tФайлы успешно переименованы!"
+
+else
+
+    echo -e "\n\t\tКоманда переименования файлов отменена!"
+fi
+
+
